@@ -1,27 +1,23 @@
 import React from 'react';
-import { Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-
+import { Box, Grid } from '@mui/material';
 import useAppData from './hooks/useAppData';
-
-const useStyles = makeStyles(theme => ({
-	root: {
-		margin: '0.5rem',
-		padding: '1rem',
-		'&.MuiGrid-container': {
-			justifyContent: 'center',
-		},
-	},
-}));
-
+import StudentAccordion from './comps/Student/StudentAccordian';
 
 function App() {
 	const { state } = useAppData();
 	const { studentAssessments } = state;
-	const classes = useStyles();
 
   return (
-    <Grid container direction='column' className={classes.root}>
+    <Grid container direction='column' sx={{ margin: '0.5rem', padding: '1rem', alignContent: 'center' }}>
+			<Box sx={{
+				width: {
+					xs: '350px',
+					xl: '900px',
+				},
+				margin: '0.5rem',
+			}}>
+				{studentAssessments.map(student => <StudentAccordion student={student} />)}
+			</Box>
     </Grid>
   );
 }
