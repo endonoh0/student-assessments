@@ -16,12 +16,14 @@ const StyledNameTypography = styled(Typography)((props) => ({
 }));
 
 const StyledTypography = styled(Typography)((props) => ({
-	marginLeft: '2.25rem',
+	marginLeft: props.type === 'summary' ? '2.25rem' : '1.25rem',
 }));
 
 const StyledAccordionSummary = styled(AccordionSummary)((props) => ({
+	width: '100%',
 	'& .MuiAccordionSummary-expandIconWrapper': {
 		marginBottom: '95px',
+		marginRight: '0.75rem',
 	},
 }));
 
@@ -58,7 +60,7 @@ const Student = ({student}) => {
 				const label = Object.keys(el)[0];
 				const value = Object.values(el)[0];
 				return (
-					<StyledTypography key={i}>
+					<StyledTypography key={i} type='tests'>
 						{label}: &nbsp;&nbsp;&nbsp;&nbsp; {value}%
 					</StyledTypography>
 				)
@@ -66,7 +68,7 @@ const Student = ({student}) => {
 		} else {
 			details = Object.keys(dataset).map((label, i) => {
 				return (
-					<StyledTypography key={i}>
+					<StyledTypography key={i} type='summary'>
 						{label}: {dataset[label]}
 					</StyledTypography>
 				)
