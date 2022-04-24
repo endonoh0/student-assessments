@@ -4,10 +4,15 @@ import { AccordionDetails, Typography } from '@mui/material';
 const StudentDetails = (props) => {
 	return (
 		<AccordionDetails>
-			<Typography>
-				Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-				Aliquam eget maximus est, id dignissim quam.
-			</Typography>
+			{props.data.map(el => {
+				const label = Object.keys(el)[0];
+				const value = Object.values(el)[0];
+				return (
+					<Typography>
+						{label} {value}
+					</Typography>
+				)
+			})}
 		</AccordionDetails>
 	)
 }

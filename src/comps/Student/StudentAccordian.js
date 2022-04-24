@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import StudentDetails from './StudentDetails';
 import StudentSummary from './StudentSummary';
 
-
 const StudentAccordion = (props) => {
   const [expanded, setExpanded] = useState(false);
 	const { student } = props;
@@ -11,6 +10,19 @@ const StudentAccordion = (props) => {
   const handleChange = (event) => {
     setExpanded(!expanded);
   };
+
+	const average = student.grades.reduce((a, b) => Number(a) + Number(b), 0) / student.grades.length || 0;
+	const summary = {
+		Email: student.email,
+		Compnay: student.company,
+		Skill: student.skill,
+		Average: average,
+	};
+	const tests = student.grades.map((grade, i) => {
+		const label = `Test ${i + 1}`;
+		const test = { [label]: grade };
+		return test;
+	})
 
   return (
 		<Accordion
@@ -21,12 +33,14 @@ const StudentAccordion = (props) => {
 			<StudentSummary
 				src={student.pic}
 				name={`${student.firstName} ${student.lastName}`}
-				email={student.email}
-				company={student.company}
-				skill={student.skill}
-				average={'0'}
+				data={summary}
 			/>
-			<StudentDetails />
+			<StudentSummary
+				data={tests}
+			/>
+			{/* <StudentDetails
+				data={tests}
+			/> */}
 		</Accordion>
   );
 }
