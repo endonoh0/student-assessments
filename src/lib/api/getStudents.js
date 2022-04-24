@@ -5,7 +5,7 @@ import axios from 'axios';
  *
  * @return {Promise<any>}
  */
-const getStudentAssessments = () => {
+const getStudents = () => {
 	return new Promise((resolve, reject) => {
 		axios.get('https://api.hatchways.io/assessment/students')
 			.then(res => resolve(res.data.students))
@@ -13,4 +13,4 @@ const getStudentAssessments = () => {
 	});
 };
 
-export default getStudentAssessments;
+export default getStudents;
