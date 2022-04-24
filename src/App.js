@@ -1,28 +1,43 @@
 import React from 'react';
-import { Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-
+import { Box, Grid, styled } from '@mui/material';
 import useAppData from './hooks/useAppData';
+import Student from './comps/Student';
+import SearchTextInput from './comps/SearchTextInput';
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		margin: '0.5rem',
-		padding: '1rem',
-		'&.MuiGrid-container': {
-			justifyContent: 'center',
-		},
-	},
+const StyledGridContainer = styled(Grid)((props) => ({
+	margin: '0.5rem',
+	padding: '1rem',
+	alignContent: 'center',
 }));
 
+const StyledBox = styled(Box)((props) => ({
+	[props.theme.breakpoints.up("xs")]: {
+		width: '350px',
+  },
+  [props.theme.breakpoints.up("xl")]: {
+		width: '900px',
+  },
+	margin: '0.5rem',
+}));
 
 function App() {
-	const { state } = useAppData();
-	const { studentAssessments } = state;
-	const classes = useStyles();
+	const { state, setStudentSearch, studentNames } = useAppData();
+	const { students, studentSearch } = state;
 
   return (
-    <Grid container direction='column' className={classes.root}>
-    </Grid>
+    <StyledGridContainer container direction='column'>
+			<StyledBox>
+				{students.length > 0 &&
+					<SearchTextInput
+						names={studentNames}
+						students={students}
+						setStudentSearch={setStudentSearch}
+					/>
+				}
+				{studentSearch.length > 0 && studentSearch.map((item, i) => <Student student={item} key={i} />)}
+				{studentSearch.length <= 0 && students.map((item, i) => <Student student={item} key={i} />)}
+			</StyledBox>
+    </StyledGridContainer>
   );
 }
 

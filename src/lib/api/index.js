@@ -2,8 +2,8 @@
  * @description Export all functions contains within the Api folder in this file.
  */
 
-import get_student_assessments from './getStudentAssessments';
+import get_students from './getStudents';
 
 export {
-	get_student_assessments,
+	get_students,
 }
