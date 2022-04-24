@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography, styled } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import StudentAvatar from './StudentAvatar';
 
 const StyledNameTypography = styled(Typography)((props) => ({
@@ -16,6 +17,12 @@ const StyledNameTypography = styled(Typography)((props) => ({
 
 const StyledTypography = styled(Typography)((props) => ({
 	marginLeft: '2.25rem',
+}));
+
+const StyledAccordionSummary = styled(AccordionSummary)((props) => ({
+	'& .MuiAccordionSummary-expandIconWrapper': {
+		marginBottom: '95px',
+	},
 }));
 
 const Student = ({student}) => {
@@ -52,7 +59,7 @@ const Student = ({student}) => {
 				const value = Object.values(el)[0];
 				return (
 					<StyledTypography key={i}>
-						{label}: {value}%
+						{label}: &nbsp;&nbsp;&nbsp;&nbsp; {value}%
 					</StyledTypography>
 				)
 			});
@@ -87,13 +94,13 @@ const Student = ({student}) => {
 			onChange={handleChange}
 			disableGutters
 		>
-			<AccordionSummary
-				expandIcon={<ExpandMoreIcon />}
+			<StyledAccordionSummary
+				expandIcon={expanded ? <RemoveIcon /> : <AddIcon />}
 				aria-controls="panel1bh-content"
 				id="panel1bh-header"
 			>
 				{getSummaryDetails(summaryDetails)}
-			</AccordionSummary>
+			</StyledAccordionSummary>
 			<AccordionDetails
 				sx={{
 					display: 'flex',
